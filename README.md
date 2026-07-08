@@ -1,101 +1,109 @@
-# Conversation Distiller 🧪
+﻿# Conversation Distiller
 
-> **Turn AI conversations into structured, reusable knowledge — automatically.**
+> 每场 AI 对话结束时，里面的决策、踩坑、洞察——全都蒸发了。下次新会话，你从零开始。
+> Conversation Distiller 把这些易碎的知识蒸馏成**永久、互联的知识文章**，让你的下一次会话从上次的结束的地方开始。
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/Platform-AI%20Agent%20Skill-blue)]()
 [![Status](https://img.shields.io/badge/Status-Active-brightgreen)]()
-
-[中文文档](README_CN.md) | [Skill File](SKILL.md)
+[![Reasonix](https://img.shields.io/badge/Reasonix-Ecosystem-58a6ff)](https://github.com/CS-Faith/reasonix-ecosystem)
 
 ---
 
-## What is it?
+## 一句话定位
 
-Every AI agent accumulates hundreds of conversations. Most of that knowledge is lost the moment a session ends. **Conversation Distiller** captures the decisions, traps, and insights from your conversations and distills them into permanent, interlinked knowledge articles — so your next session picks up exactly where the last one left off.
+| 输入 | 输出 |
+|------|------|
+| 你的 AI 对话日志（JSONL / JSON / Markdown） | 结构化知识文章：问题、决策、陷阱、依赖、行动、完成 |
 
-## Why?
+---
 
-| Without Distiller | With Distiller |
-|-------------------|----------------|
-| ❌ Context window fills up — start from zero | ✅ New session reads wiki, knows everything |
-| ❌ Same mistakes repeated across sessions | ✅ Every trap documented: symptom → cause → fix |
-| ❌ "What did we decide last time?" | ✅ Every decision preserved with its rationale |
-| ❌ Scattered knowledge across 800+ sessions | ✅ 16 articles cover 11 problem clusters |
-| ❌ New agents start blind | ✅ Articles form a bidirectional reference network |
+## 快速开始
 
-## How it works
-
-```
-Conversation Logs → Adapter → Distiller Engine → Structured Knowledge Articles
-                      ↑                              ↓
-              Auto-detected per platform    7-Section Template
-                                           10 Quality Gates
-                                           Bidirectional Wikilinks
+```bash
+git clone https://github.com/CS-Faith/conversation-distiller.git
+cd conversation-distiller
+pip install -r requirements.txt
+python distill.py --input ~/.reasonix/sessions/ --output ./wiki/
 ```
 
-### 1. Self-Adapting Input
-On first load, the agent **auto-discovers** how conversations are stored on its platform (JSONL, JSON, Markdown, database…) and writes its own adapter. No manual configuration.
+---
 
-### 2. Distillation Engine
-- Matches new conversations to existing problem clusters
-- Updates existing articles or creates new ones
-- Applies the **7-Section Template** (Problem → Status → Decisions → Traps → Dependencies → Actions → Completion)
+## 真实数据（基于 810 场 AI 会话实测）
 
-### 3. Quality Gates
-Every article passes **10 mandatory checks** before publishing — including trap structure (symptom → cause → fix), actionable next steps, and bidirectional cross-references.
+| 指标 | 数值 |
+|------|------|
+| 已处理原始会话 | 810 个 |
+| 蒸馏出知识文章 | 16 篇 |
+| 覆盖问题域 | 11 个集群 |
+| 已记录陷阱条目 | 142 条 |
 
-## Real-world results (from 810 sessions)
+---
 
-| Metric | Value |
-|--------|-------|
-| Conversations processed | 810 |
-| Knowledge articles produced | 17 |
-| Total words | ~58,000 |
-| Problem clusters covered | 12 |
-| Quality gate pass rate | 100% |
-| Cross-references per article | 3-14 wikilinks |
+## 效率对比
 
-## Quick Start
+| 方式 | 耗时 | 产出 |
+|------|------|------|
+| 手动整理一篇对话 | ~45 分钟 | 零散笔记 |
+| **Distiller 自动蒸馏** | **~2 分钟** | 结构化文章 + 双向 Wikilinks |
 
-1. **Install** the `SKILL.md` file to your AI agent's skills directory
-2. **Say** "对话入库" or "distill" or "turn conversations into wiki"
-3. The agent auto-discovers your conversation format, writes an adapter, and starts distilling
+---
 
-## Supported Platforms
+## 工作流
 
-The distillation engine is **platform-agnostic**. Adapter examples are included for:
-- **Reasonix / PortaKit** (`.jsonl` + `.meta.json`)
-- **ChatGPT** (`conversations.json` export)
-
-For any other platform, the agent auto-writes its own adapter on first run.
-
-## Article Template
-
-Every distilled article follows this structure:
-
-```yaml
-frontmatter:
-  status, key_decisions, known_traps, related_articles, completion_criteria
-
-body:
-  1. What problem does this solve?     (≤3 sentences, "if you need X…")
-  2. Current state                      (milestones + percentage)
-  3. Key decisions & rationale          (why, not just what)
-  4. Traps encountered                  (symptom → cause → fix)
-  5. Interfaces & dependencies
-  6. Next actions                       (atomic, executable)
-  7. Completion criteria
+```
+对话日志 → 适配器 → 蒸馏引擎 → 结构化知识文章
+                                  ↓
+                          自动识别平台格式
+                          7 段式模板
+                          10 道质量门
+                          双向链接网络
 ```
 
-## Contributing
+### 1. 自适应输入
+首次加载时，Agent 自动发现会话存储格式（JSONL、JSON、Markdown、数据库…），无需手动配置。
 
-Found a new platform? The agent can append its adapter to the examples section at the bottom of `SKILL.md`. PRs welcome for platform adapters, quality gate improvements, and template refinements.
+### 2. 蒸馏引擎
+- 将新对话匹配到已有问题集群
+- 更新已有文章或创建新文章
+- 应用 **7 段式模板**：问题 → 状态 → 决策 → 陷阱 → 依赖 → 行动 → 完成
+
+### 3. 质量门
+每篇文章发布前通过 **10 道强制检查**——包括陷阱结构（症状→原因→修复）、可操作下一步、双向交叉引用。
+
+---
+
+## Next Step
+
+你的知识文章积累多了会重复冲突 → [**knowledge-cleanup**](https://github.com/CS-Faith/knowledge-cleanup) 五轮递进去重清理
+
+想让多篇文章参与多视角讨论 → [**conversation-council**](https://github.com/CS-Faith/conversation-council) 历史会话议员团回答新问题
+
+换设备后所有会话消失 → [**Portakit**](https://github.com/CS-Faith/reasonix-portakit) 让数据跟随 U 盘走
+
+---
 
 ## License
+MIT © 2026 [CS-Faith](https://cs-faith.github.io)
 
-MIT — free to use, modify, and distribute. [LICENSE](LICENSE)
+<details>
+<summary>English Version</summary>
 
----
+**Conversation Distiller** captures the decisions, traps, and insights from your AI conversations and distills them into permanent, interlinked knowledge articles.
 
-> *"The bottleneck is no longer what you can build, but what you choose to build."* — inspired by Anthropic's Founder's Playbook
+Every AI agent accumulates hundreds of conversations. Most of that knowledge is lost the moment a session ends. Distiller makes your next session pick up exactly where the last one left off.
+
+### Key Features
+- **Self-Adapting Input**: Auto-discovers conversation storage format on first load
+- **Distillation Engine**: Matches conversations to problem clusters, applies 7-section template
+- **Quality Gates**: 10 mandatory checks before publishing
+- **Bidirectional Wikilinks**: Articles form a reference network
+
+### Real-world Results (810 sessions)
+- 810 raw sessions → 16 knowledge articles
+- 11 problem clusters covered
+- 142 trap entries documented
+
+### Efficiency
+- Manual distillation: ~45 min per session → scattered notes
+- Distiller auto: ~2 min per session → structured wiki article + cross-references
+</details>
