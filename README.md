@@ -88,7 +88,7 @@ MIT © 2026 [CS-Faith](https://cs-faith.github.io)
 <details>
 <summary>English Version</summary>
 
-**Conversation Distiller** captures the decisions, traps, and insights from your AI conversations and distills them into permanent, interlinked knowledge articles.
+**Conversation Distiller** — Conversations evaporate. Knowledge shouldn't. Distiller turns every AI session into structured, lasting knowledge — automatically.
 
 Every AI agent accumulates hundreds of conversations. Most of that knowledge is lost the moment a session ends. Distiller makes your next session pick up exactly where the last one left off.
 
