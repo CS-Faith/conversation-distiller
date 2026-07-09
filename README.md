@@ -1,6 +1,6 @@
 ﻿# Conversation Distiller
 
-> 每场 AI 对话结束时，里面的决策、踩坑、洞察——全都蒸发了。下次新会话，你从零开始。
+> 对话会蒸发，知识该留下：自动把每场AI对话，蒸馏成结构化的永久知识。
 > Conversation Distiller 把这些易碎的知识蒸馏成**永久、互联的知识文章**，让你的下一次会话从上次的结束的地方开始。
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
